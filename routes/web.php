@@ -66,3 +66,4 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::view('/audit-logs', 'admin.audit-logs.index')->name('audit-logs');
     Route::view('/settings', 'admin.settings.index')->name('settings');
 });
+
