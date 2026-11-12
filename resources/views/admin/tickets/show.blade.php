@@ -55,7 +55,7 @@
             <div class="panel-heading">
                 <div><h2>Support handling</h2><p>Issue tickets are routed directly to the selected organization.</p></div>
             </div>
-            <p>This support ticket is separate from the walk-in payment line.</p>
+            <p class="ticket-status-copy">This support ticket is separate from the walk-in payment line.</p>
         </section>
         <x-ticket-updates :ticket="$ticket" admin />
     </div>
