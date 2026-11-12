@@ -1,0 +1,7 @@
+@extends('layouts.app')
+@section('title', 'My Profile — Problinx')
+@section('page-title', 'My profile')
+@section('content')
+<div class="page-heading"><div><span class="eyebrow">YOUR ACCOUNT</span><h1>My profile</h1><p>Keep your contact details up to date for your support requests.</p></div><button class="btn btn-primary" data-action="edit-profile">Edit profile <span>✎</span></button></div>
+<div class="profile-layout"><section class="panel profile-summary"><div class="profile-photo" id="profile-initials">JD</div><h2 id="profile-name">John Davis</h2><p id="profile-department">Product</p><span class="badge badge-status-open">ACTIVE ACCOUNT</span><div class="profile-mini-info"><small>MEMBER SINCE</small><strong>January 2024</strong></div></section><section class="panel profile-details"><div class="panel-heading"><div><h2>Personal information</h2><p>Details linked to your account</p></div></div><div class="profile-info-grid"><div><small>FIRST NAME</small><strong id="profile-first-name">John</strong></div><div><small>LAST NAME</small><strong id="profile-last-name">Davis</strong></div><div><small>EMAIL ADDRESS</small><strong id="profile-email">user@nexadesk.com</strong></div><div><small>PHONE NUMBER</small><strong id="profile-phone">(555) 010-2048</strong></div><div><small>DEPARTMENT</small><strong>Product</strong></div><div><small>JOB TITLE</small><strong>Product Designer</strong></div></div></section></div>
+@endsection

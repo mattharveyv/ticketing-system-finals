@@ -1,0 +1,8 @@
+@extends('layouts.app')
+@section('title', 'Knowledge Base Admin — Problinx')
+@section('page-title', 'Knowledge base')
+@section('content')
+@php($articles = require resource_path('data/articles.php'))
+<div class="page-heading"><div><span class="eyebrow">SELF-SERVICE CONTENT</span><h1>Knowledge base</h1><p>Manage help articles and publish useful answers for customers.</p></div><button class="btn btn-primary" data-action="new-article">＋ New article</button></div>
+<section class="panel"><div class="ticket-filter-row"><x-search-bar id="admin-article-search" placeholder="Search articles"/><x-filter-dropdown id="article-status-filter" label="All statuses" :options="['Published', 'Draft', 'Archived']"/><span class="record-count">{{ count($articles) }} articles</span></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Article</th><th>Category</th><th>Views</th><th>Updated</th><th>Status</th><th>Actions</th></tr></thead><tbody id="admin-article-rows">@foreach ($articles as $article)<tr data-article-row data-search="{{ strtolower($article['title'].' '.$article['category']) }}"><td><strong>{{ $article['title'] }}</strong><small class="table-subtitle">{{ $article['summary'] }}</small></td><td>{{ $article['category'] }}</td><td>{{ $article['views'] }}</td><td>{{ $article['updated'] }}</td><td><x-badge tone="status-resolved">Published</x-badge></td><td><div class="inline-actions"><button class="text-button" data-action="edit-article" data-slug="{{ $article['slug'] }}">Edit</button><button class="text-button" data-action="archive-article" data-slug="{{ $article['slug'] }}">Archive</button></div></td></tr>@endforeach</tbody></table></div></section>
+@endsection

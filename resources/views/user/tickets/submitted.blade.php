@@ -1,0 +1,6 @@
+@extends('layouts.app')
+@section('title', 'Request Submitted — MSEUF Help Desk')
+@section('page-title', 'Request submitted')
+@section('content')
+<section class="success-page"><span class="success-check">✓</span><span class="eyebrow">SENT TO MSEUF SUPPORT</span><h1>Your support ticket was submitted.</h1><p>Your concern was sent to the selected university organization. You can track its status from your support tickets page.</p><div class="success-ticket-card"><span class="success-ticket-icon">▤</span><div><small>TICKET NUMBER</small><strong>{{ $ticket->ticket_number }}</strong></div><x-status-badge :status="$ticket->status" /></div><div class="success-facts"><div><small>Issue type</small><strong>{{ $ticket->category }}</strong></div><div><small>Support organization</small><strong>{{ $ticket->supportType?->name ?? $ticket->department }}</strong></div><div><small>Submitted</small><strong>{{ $ticket->created_at->format('M j, Y') }}</strong></div></div><div class="success-actions"><x-button href="{{ route('user.tickets.show', $ticket->ticket_number) }}" variant="primary">View support ticket <span>→</span></x-button><x-button href="{{ route('user.tickets') }}">My support tickets</x-button></div></section>
+@endsection

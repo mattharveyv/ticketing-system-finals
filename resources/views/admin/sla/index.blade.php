@@ -1,0 +1,10 @@
+@extends('layouts.app')
+@section('title', 'SLA Dashboard — Problinx')
+@section('page-title', 'SLA monitor')
+@section('content')
+@php($tickets = require resource_path('data/tickets.php'))
+<div class="page-heading"><div><span class="eyebrow">SERVICE LEVELS</span><h1>SLA dashboard</h1><p>See which requests are on track, at risk, or need immediate attention.</p></div><a class="btn btn-secondary" href="{{ route('admin.settings') }}">Configure targets ⚙</a></div>
+<section class="stats-grid"><x-stat-card label="Active SLA" value="94.2%" note="↑ 2.1% this month" icon="✓" tone="green"/><x-stat-card label="At risk" value="4" note="Due within 2 hours" icon="◷" tone="amber"/><x-stat-card label="Breached" :value="count(array_filter($tickets, fn ($t) => $t['priority'] === 'Critical'))" note="Needs immediate action" icon="!" tone="red"/><x-stat-card label="Avg. response" value="1.8h" note="Target is 4 business hours" icon="↩" tone="blue"/></section>
+<div class="sla-target-grid"><section class="panel"><div class="panel-heading"><div><h2>First response target</h2><p>Business hours · 4 hour target</p></div><x-badge tone="status-resolved">ON TRACK</x-badge></div><div class="sla-large-value">1.8<small>hours average</small></div><div class="progress-track"><i style="width:74%"></i></div><small>74% of tickets met the first response target.</small></section><section class="panel"><div class="panel-heading"><div><h2>Resolution target</h2><p>Business hours · 24 hour target</p></div><x-badge tone="status-waiting">MONITORING</x-badge></div><div class="sla-large-value">8.4<small>hours average</small></div><div class="progress-track"><i style="width:88%"></i></div><small>88% of tickets were resolved within target.</small></section></div>
+<section class="panel"><div class="panel-heading"><div><h2>Tickets approaching SLA</h2><p>Requests with active service commitments</p></div></div><div class="ticket-card-list">@foreach (array_slice(array_filter($tickets, fn ($ticket) => in_array($ticket['status'], ['New','Open','In Progress','Waiting','Escalated'], true)), 0, 6) as $ticket)<x-ticket-card :ticket="$ticket" :admin="true"/>@endforeach</div></section>
+@endsection

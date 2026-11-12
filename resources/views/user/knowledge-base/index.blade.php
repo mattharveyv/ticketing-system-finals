@@ -1,0 +1,10 @@
+@extends('layouts.app')
+@section('title', 'Knowledge Base — Problinx')
+@section('page-title', 'Knowledge base')
+@section('content')
+@php($articles = require resource_path('data/articles.php'))
+<div class="page-heading"><div><span class="eyebrow">SELF-SERVICE, MADE SIMPLE</span><h1>Knowledge base</h1><p>Find a quick answer from guides written by your support team.</p></div></div>
+<section class="knowledge-hero"><span class="eyebrow">HOW CAN WE HELP?</span><h2>What are you looking for?</h2><x-search-bar id="article-search" placeholder="Search help articles..."/><div class="popular-searches">Popular: <button data-article-search="VPN">VPN</button><button data-article-search="password">Password</button><button data-article-search="printer">Printer</button></div></section>
+<div class="content-section-head"><div><span class="eyebrow">BROWSE BY TOPIC</span><h2>Find the right guide</h2></div></div><div class="category-grid">@foreach (['Getting Started', 'Account', 'Hardware', 'Software', 'Network', 'Security', 'Billing', 'Troubleshooting'] as $category)<button class="knowledge-category" data-article-category="{{ $category }}"><span>{{ ['Getting Started' => '⌂', 'Account' => '♙', 'Hardware' => '▣', 'Software' => '▤', 'Network' => '⌁', 'Security' => '◇', 'Billing' => '$', 'Troubleshooting' => '⚙'][$category] }}</span><strong>{{ $category }}</strong><small>Explore guides →</small></button>@endforeach</div>
+<div class="content-section-head"><div><span class="eyebrow">MOST READ</span><h2>Popular articles</h2></div><a class="subtle-link" href="#recent">Recently added →</a></div><div class="article-grid" id="article-list">@foreach (array_slice($articles, 0, 9) as $article)<a class="article-card" href="{{ url('/user/knowledge-base/'.$article['slug']) }}" data-article-card data-category="{{ $article['category'] }}"><span class="article-icon">◇</span><div><small>{{ $article['category'] }} · {{ $article['views'] }} reads</small><h3>{{ $article['title'] }}</h3><p>{{ $article['summary'] }}</p></div><span class="article-arrow">↗</span></a>@endforeach</div>
+@endsection

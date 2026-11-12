@@ -1,0 +1,8 @@
+@extends('layouts.app')
+@section('title', 'Help Article — Problinx')
+@section('page-title', 'Knowledge base')
+@section('content')
+@php($articles = require resource_path('data/articles.php'))
+@php($article = collect($articles)->firstWhere('slug', $slug) ?? $articles[0])
+<div class="article-detail-wrap"><a class="back-link" href="{{ route('user.knowledge') }}">← Knowledge base</a><article class="panel article-detail"><span class="eyebrow">{{ strtoupper($article['category']) }} · HELP ARTICLE</span><h1>{{ $article['title'] }}</h1><p class="article-byline">Problinx Support Team · Updated {{ $article['updated'] }}</p><div class="article-prose"><p>{{ $article['summary'] }}</p><h2>Before you begin</h2><p>Make sure you are using a company-managed device and have your account details available. Never share your password or security codes with another person.</p><h2>Try these steps</h2><ol><li>Save your work and restart the app or device.</li><li>Check your connection and confirm you are using the latest company-approved version.</li><li>Try the action again and note any message that appears.</li><li>If the issue continues, create a ticket and include what you have already tried.</li></ol><div class="article-callout"><strong>Still need a hand?</strong><p>Our support team can help with the next step.</p><a href="{{ route('user.tickets.create') }}">Create a ticket →</a></div></div><div class="article-helpful" id="article-helpful"><span>Was this article helpful?</span><button data-helpful="yes">Yes, helpful</button><button data-helpful="no">Not quite</button></div></article></div>
+@endsection
